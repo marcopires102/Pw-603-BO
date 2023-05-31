@@ -55,7 +55,7 @@ export default {
       } else {
         this.table3.data = [
           {
-            username: "user1",
+            username: "user2",
             email: "user1@example.com",
             password: "password1"
 

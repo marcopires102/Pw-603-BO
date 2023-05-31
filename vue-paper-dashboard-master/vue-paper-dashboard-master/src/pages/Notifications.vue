@@ -61,7 +61,7 @@ export default {
 
           },
           {
-            username: "user2",
+            username: "user3",
             email: "user2@example.com",
             password: "password2"
 

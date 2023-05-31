@@ -13,15 +13,15 @@
               <tr v-for="(row, index) in table2.data" :key="index">
                 <td v-for="(value, key) in row" :key="key">
                   <!-- Renderizar dropdown somente para a coluna "Estado" -->
-                  <template v-if="key === 'Estado'">
-                    <select @change="updateEstado(index, $event.target.value)" v-model="row.Estado">
+                  <template v-if="key === 'estado'">
+                    <select @change="updateEstado(index, $event.target.value)" v-model="row.estado">
                       <option value="Confirmado">Confirmado</option>
                       <option value="Pendente">Pendente</option>
                     </select>
                   </template>
                   <!-- Renderizar dropdown somente para a coluna "Guia" -->
-                  <template v-else-if="key === 'Guia'">
-                    <select @change="updateGuia(index, $event.target.value)" v-model="row.Guia">
+                  <template v-else-if="key === 'guia'">
+                    <select @change="updateGuia(index, $event.target.value)" v-model="row.guia">
                       <option value="Por Definir">Por Definir</option>
                       <option value="Filipe Almeida">Filipe Almeida</option>
                       <option value="Andre Pereira">Andre Pereira</option>
@@ -50,7 +50,6 @@ export default {
         title: "Table on Plain Background",
         subTitle: "Here is a subtitle for this table",
         columns: [
-          "Username",
           "Nome",
           "Telefone",
           "Tour",
@@ -77,28 +76,26 @@ export default {
       } else {
         this.table2.data = [
           {
-            Username: "user1",
-            Nome: "Nome 1",
-            Telefone: "123456789",
-            Tour: "Tour A",
-            "Numero Participantes": 5,
-            Data: "2023-06-01",
-            Horas: "10:00",
-            Preço: 50,
-            Estado: "Confirmado",
-            Guia: "Por definir"
+            nome: "Nome 1",
+            telefone: "123456789",
+            tour: "Tour A",
+            "numero Participantes": 5,
+            data: "2023-06-01",
+            horas: "10:00",
+            preço: 50,
+            estado: "Confirmado",
+            guia: "Por definir"
           },
           {
-            Username: "user2",
-            Nome: "Nome 2",
-            Telefone: "987654321",
-            Tour: "Tour B",
-            "Numero Participantes": 4,
-            Data: "2023-06-02",
-            Horas: "14:00",
-            Preço: 40,
-            Estado: "Pendente",
-            Guia: "Por definir"
+            nome: "Nome 2",
+            telefone: "987654321",
+            tour: "Tour B",
+            "numero Participantes": 4,
+            data: "2023-06-02",
+            horas: "14:00",
+            preço: 40,
+            estado: "Pendente",
+            guia: "Por definir"
           }
         ];
 
@@ -106,11 +103,11 @@ export default {
       }
     },
     updateEstado(index, value) {
-      this.table2.data[index].Estado = value;
+      this.table2.data[index].estado = value;
       localStorage.setItem("registros", JSON.stringify(this.table2.data));
     },
     updateGuia(index, value) {
-      this.table2.data[index].Guia = value;
+      this.table2.data[index].guia = value;
       localStorage.setItem("registros", JSON.stringify(this.table2.data));
     }
 

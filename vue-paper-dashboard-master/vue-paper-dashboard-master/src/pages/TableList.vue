@@ -19,6 +19,15 @@
                       <option value="Pendente">Pendente</option>
                     </select>
                   </template>
+                  <!-- Renderizar dropdown somente para a coluna "Guia" -->
+                  <template v-else-if="key === 'Guia'">
+                    <select @change="updateGuia(index, $event.target.value)" v-model="row.Guia">
+                      <option value="Por Definir">Por Definir</option>
+                      <option value="Filipe Almeida">Filipe Almeida</option>
+                      <option value="Andre Pereira">Andre Pereira</option>
+                      <option value="Matilde Souza">Matilde Souza</option>
+                    </select>
+                  </template>
                   <!-- Renderizar valor para as outras colunas -->
                   <template v-else>
                     {{ value }}
@@ -49,57 +58,66 @@ export default {
           "Data",
           "Horas",
           "Preço",
-          "Estado"
+          "Estado",
+          "Guia",
         ],
         data: []
       }
     };
   },
   mounted() {
-    // Retrieve "registros" data from local storage
-    const storedRegistros = localStorage.getItem("registros");
-    if (storedRegistros) {
-      this.table2.data = JSON.parse(storedRegistros);
-    } else {
-      // Fallback data if no data in local storage
-      this.table2.data = [
-        {
-          Username: "user1",
-          Nome: "Nome 1",
-          Telefone: "123456789",
-          Tour: "Tour A",
-          "Numero Participantes": 5,
-          Data: "2023-06-01",
-          Horas: "10:00",
-          Preço: 50,
-          Estado: "Confirmado"
-        },
-        {
-          Username: "user2",
-          Nome: "Nome 2",
-          Telefone: "987654321",
-          Tour: "Tour B",
-          "Numero Participantes": 3,
-          Data: "2023-06-02",
-          Horas: "14:00",
-          Preço: 40,
-          Estado: "Pendente"
-        }
-        // Add more data objects as needed
-      ];
-
-      // Save data to local storage
-      localStorage.setItem("registros", JSON.stringify(this.table2.data));
-    }
+    this.loadTableData();
   },
   methods: {
+    loadTableData() {
+      const storedRegistros = localStorage.getItem("registros");
+      if (storedRegistros) {
+        this.table2.data = JSON.parse(storedRegistros);
+        this.updateNames();
+      } else {
+        this.table2.data = [
+          {
+            Username: "user1",
+            Nome: "Nome 1",
+            Telefone: "123456789",
+            Tour: "Tour A",
+            "Numero Participantes": 5,
+            Data: "2023-06-01",
+            Horas: "10:00",
+            Preço: 50,
+            Estado: "Confirmado",
+            Guia: "Por definir"
+          },
+          {
+            Username: "user2",
+            Nome: "Nome 2",
+            Telefone: "987654321",
+            Tour: "Tour B",
+            "Numero Participantes": 4,
+            Data: "2023-06-02",
+            Horas: "14:00",
+            Preço: 40,
+            Estado: "Pendente",
+            Guia: "Por definir"
+          }
+        ];
+
+        localStorage.setItem("registros", JSON.stringify(this.table2.data));
+      }
+    },
     updateEstado(index, value) {
-      // Atualizar o valor "Estado" do item selecionado e salvar no Local Storage
       this.table2.data[index].Estado = value;
       localStorage.setItem("registros", JSON.stringify(this.table2.data));
+    },
+    updateGuia(index, value) {
+      this.table2.data[index].Guia = value;
+      localStorage.setItem("registros", JSON.stringify(this.table2.data));
     }
+
   }
 };
 </script>
 
 <style></style>
+
+

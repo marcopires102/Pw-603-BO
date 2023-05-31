@@ -7,6 +7,7 @@
             <thead>
               <tr>
                 <th v-for="column in table2.columns" :key="column">{{ column }}</th>
+                <th>Ação</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +33,9 @@
                   <template v-else>
                     {{ value }}
                   </template>
+                </td>
+                <td>
+                  <button @click="deleteRegistro(index)">Apagar</button>
                 </td>
               </tr>
             </tbody>
@@ -109,8 +113,11 @@ export default {
     updateGuia(index, value) {
       this.table2.data[index].guia = value;
       localStorage.setItem("registros", JSON.stringify(this.table2.data));
+    },
+    deleteRegistro(index) {
+      this.table2.data.splice(index, 1);
+      localStorage.setItem("registros", JSON.stringify(this.table2.data));
     }
-
   }
 };
 </script>

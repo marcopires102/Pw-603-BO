@@ -1,5 +1,5 @@
 module.exports = {
   lintOnSave: false,
-  publicPath: '/back-ofice/'
+  publicPath: '/Pw-603-BO/'
 };
 
